@@ -1,8 +1,9 @@
 import { onResize, onChecked, syncHeight } from './utils.js'
 
 const container = document.querySelector('.container')
-const cnEl = document.querySelectorAll('#cn > *:not(hr)')
-const enEl = document.querySelectorAll('#en > *:not(hr)')
+const mobile = document.querySelector('.mobile')
+const cnEl = document.querySelectorAll('#cn > *')
+const enEl = document.querySelectorAll('#en > *')
 
 function isFocusMode() {
   return !!container.classList.contains('focus')
@@ -57,12 +58,22 @@ function main() {
     throw new Error('The number of lines is not equal')
   }
 
+  let html = ''
+
   for (let i = 0; i < cnEl.length; i++) {
+
+    html += enEl[i].outerHTML
+    html += cnEl[i].outerHTML
+
+    if (enEl[i].tagName === 'hr') continue;
+
     syncHeight(enEl[i], cnEl[i])
     bindHighlight([enEl[i], cnEl[i]])
     enEl[i].setAttribute('data-index', i)
     cnEl[i].setAttribute('data-index', i)
   }
+
+  mobile.innerHTML = html
 
   onResize(() => {
     for (let i = 0; i < cnEl.length; i++) {

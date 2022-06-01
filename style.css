@@ -48,6 +48,10 @@ hr {
   opacity: .1;
 }
 
+hr + hr {
+  display: none;
+}
+
 .container {
   margin: 3rem auto 6rem;
   padding: 0 2rem;
@@ -104,7 +108,7 @@ hr {
 .btn-group {
   position: fixed;
   top: 3rem;
-  right: 2rem;
+  right: 1rem;
   display: grid;
   row-gap: 1rem;
   justify-items: center;
@@ -164,4 +168,22 @@ hr {
 
 .btn-switch:checked::before {
   transform: translateX(100%);
+}
+
+.mobile {
+  display: none;
+}
+
+.mobile > *:nth-child(2n) {
+  opacity: 0.4;
+}
+
+@media screen and (max-width: 760px) {
+  .container .col,
+  .container .btn-group {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
 }
